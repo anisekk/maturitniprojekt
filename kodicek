@@ -1,27 +1,35 @@
-#include <Servo.h>
-
-/*
- * Created by ArduinoGetStarted.com
- *
- * This example code is in the public domain
- *
- * Tutorial page: https://arduinogetstarted.com/…nfc
- */
-
-#include <SPI.h>
+ #include <SPI.h>
 #include <MFRC522.h>
 
 #define SS_PIN 20
 #define RST_PIN 5
 
 MFRC522 rfid(SS_PIN, RST_PIN);
+String karta;
+String lastKarta;
+String KartaZlata = "1789714527";
+String KartaStribrna = "17812217527";
+String KartaBronzova = "801543648";
+int Prilozeni = 0;
+int tlacPin = 7;    
+int ledPin =  3;
+int ledPinZ =  9;
+int ledPinC =  8;    
+int stavTlac = 0;
+int laststavTlac = LOW;
+int stavLed = LOW;
 
 void setup() {
   Serial.begin(9600);
   SPI.begin(); // init SPI bus
   rfid.PCD_Init(); // init MFRC522
 
-  Serial.println("Tap RFID/NFC Tag on reader");
+  Serial.println("Přiložte kartu ke čtečce.");
+
+  pinMode(ledPinC, OUTPUT);
+  pinMode(ledPinZ, OUTPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(tlacPin, INPUT);
 }
 
 void loop() {
@@ -34,13 +42,60 @@ void loop() {
       // print NUID in Serial Monitor in the hex format
       Serial.print("UID:");
       for (int i = 0; i < rfid.uid.size; i++) {
-        Serial.print(rfid.uid.uidByte[i] < 0x10 ? " 0" : " ");
-        Serial.print(rfid.uid.uidByte[i], HEX);
+
+        Serial.print(rfid.uid.uidByte[i]);
+      karta = karta + (rfid.uid.uidByte[i]);
+        
       }
       Serial.println();
-
+      lastKarta = karta;
+      karta = "";
+      Prilozeni++;
+      Serial.println(lastKarta);
+      Serial.println();
       rfid.PICC_HaltA(); // halt PICC
       rfid.PCD_StopCrypto1(); // stop encryption on PCD
+
+  //zlata
+      if (lastKarta == KartaZlata && Prilozeni != 2){
+        Serial.print("Byla přiložena zlatá karta.");
+      digitalWrite(ledPinC, LOW);
+      
+  } else {
+    digitalWrite(ledPinC, LOW);
+  }
+  
+      if (lastKarta == KartaZlata && Prilozeni != 2){
+      digitalWrite(ledPinZ, HIGH);
+      
+  } else {
+    digitalWrite(ledPinZ, LOW);
+  }
+   if (Prilozeni == 2){
+  digitalWrite(ledPinZ, LOW);
+  digitalWrite(ledPinC, LOW);
+  Prilozeni = 0;
+  
+  }
+  
     }
   }
+
+  stavTlac = digitalRead(tlacPin);
+  if (stavTlac == HIGH && laststavTlac == LOW) {
+    stavLed = !stavLed;
+  }
+
+
+  
+  if (stavLed == HIGH) {
+    digitalWrite(ledPin, HIGH);
+  } else {
+    digitalWrite(ledPin, LOW);
+  }
+
+  laststavTlac = stavTlac;
+  lastKarta = "";
+        Serial.println(Prilozeni);
+
 }
