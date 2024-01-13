@@ -1,7 +1,7 @@
  #include <SPI.h>
 #include <MFRC522.h>
 
-#define SS_PIN 20
+#define SS_PIN 2
 #define RST_PIN 5
 
 MFRC522 rfid(SS_PIN, RST_PIN);
@@ -11,10 +11,43 @@ String KartaZlata = "1789714527";
 String KartaStribrna = "17812217527";
 String KartaBronzova = "801543648";
 int Prilozeni = 0;
-int tlacPin = 7;    
-int ledPin =  3;
-int ledPinZ =  9;
-int ledPinC =  8;    
+
+int tlacPin1 = 14; 
+int tlacPin2 = 15; 
+int tlacPin3 = 16; 
+int tlacPin4 = 17; 
+int tlacPin5 = 18; 
+int tlacPin6 = 19; 
+int tlacPin7 = 20; 
+int tlacPin8 = 21; 
+
+int ledPinB1 =  22;
+int ledPinB2 =  23;
+int ledPinB3 =  24;
+int ledPinB4 =  25;
+int ledPinB5 =  26;
+int ledPinB6 =  27;
+int ledPinB7 =  28;
+int ledPinB8 =  29;
+
+int ledPinZ1 =  30;
+int ledPinZ2 =  31;
+int ledPinZ3 =  32;
+int ledPinZ4 =  33;
+int ledPinZ5 =  34;
+int ledPinZ6 =  35;
+int ledPinZ7 =  36;
+int ledPinZ8 =  37;
+
+int ledPinC1 =  38;
+int ledPinC2 =  39;
+int ledPinC3 =  40;
+int ledPinC4 =  41;
+int ledPinC5 =  42;
+int ledPinC6 =  43;
+int ledPinC7 =  44;
+int ledPinC8 =  45;
+
 int stavTlac = 0;
 int laststavTlac = LOW;
 int stavLed = LOW;
@@ -26,10 +59,10 @@ void setup() {
 
   Serial.println("Přiložte kartu ke čtečce.");
 
-  pinMode(ledPinC, OUTPUT);
-  pinMode(ledPinZ, OUTPUT);
-  pinMode(ledPin, OUTPUT);
-  pinMode(tlacPin, INPUT);
+  pinMode(ledPinC1, OUTPUT);
+  pinMode(ledPinZ1, OUTPUT);
+  pinMode(ledPinB1, OUTPUT);
+  pinMode(tlacPin1, INPUT);
 }
 
 void loop() {
@@ -59,21 +92,21 @@ void loop() {
   //zlata
       if (lastKarta == KartaZlata && Prilozeni != 2){
         Serial.print("Byla přiložena zlatá karta.");
-      digitalWrite(ledPinC, LOW);
+      digitalWrite(ledPinC1, LOW);
       
   } else {
-    digitalWrite(ledPinC, LOW);
+    digitalWrite(ledPinC1, LOW);
   }
   
       if (lastKarta == KartaZlata && Prilozeni != 2){
-      digitalWrite(ledPinZ, HIGH);
+      digitalWrite(ledPinZ1, HIGH);
       
   } else {
-    digitalWrite(ledPinZ, LOW);
+    digitalWrite(ledPinZ1, LOW);
   }
    if (Prilozeni == 2){
-  digitalWrite(ledPinZ, LOW);
-  digitalWrite(ledPinC, LOW);
+  digitalWrite(ledPinZ1, LOW);
+  digitalWrite(ledPinC1, LOW);
   Prilozeni = 0;
   
   }
@@ -89,9 +122,9 @@ void loop() {
 
   
   if (stavLed == HIGH) {
-    digitalWrite(ledPin, HIGH);
+    digitalWrite(ledPinB1, HIGH);
   } else {
-    digitalWrite(ledPin, LOW);
+    digitalWrite(ledPinB1, LOW);
   }
 
   laststavTlac = stavTlac;
