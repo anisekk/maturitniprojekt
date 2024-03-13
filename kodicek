@@ -19,7 +19,7 @@ int tlacPin4 = 17;
 int tlacPin5 = 18; 
 int tlacPin6 = 19; 
 int tlacPin7 = 20; 
-int tlacPin8 = 21; 
+
 
 int ledPinB1 =  38;
 int ledPinB2 =  39;
@@ -28,7 +28,7 @@ int ledPinB4 =  41;
 int ledPinB5 =  42;
 int ledPinB6 =  43;
 int ledPinB7 =  44;
-int ledPinB8 =  45;
+
 
 int ledPinZ1 =  22;
 int ledPinZ2 =  24;
@@ -37,7 +37,7 @@ int ledPinZ4 =  28;
 int ledPinZ5 =  30;
 int ledPinZ6 =  32;
 int ledPinZ7 =  34;
-int ledPinZ8 =  36;
+
 
 int ledPinC1 =  23;
 int ledPinC2 =  25;
@@ -46,7 +46,7 @@ int ledPinC4 =  29;
 int ledPinC5 =  31;
 int ledPinC6 =  33;
 int ledPinC7 =  35;
-int ledPinC8 =  37;
+
 
 int stavTlac = 0;
 int laststavTlac = LOW;
