@@ -1,0 +1,346 @@
+#include <SPI.h>
+#include <MFRC522.h>
+
+#define SS_PIN 53
+#define RST_PIN 49
+
+MFRC522 rfid(SS_PIN, RST_PIN);
+String karta;
+String lastKarta;
+
+String KartaZlata = "1789714527";
+String KartaStribrna = "17812217527";
+String KartaBronzova = "801543648";
+
+int PrilozeniZ = 0;
+int PrilozeniS = 0;
+int PrilozeniB = 0;
+
+int tlacPin1 = 14; 
+int tlacPin2 = 15; 
+int tlacPin3 = 16; 
+int tlacPin4 = 17; 
+int tlacPin5 = 18; 
+int tlacPin6 = 19; 
+int tlacPin7 = 20; 
+
+
+int ledPinB1 =  38;
+int ledPinB2 =  39;
+int ledPinB3 =  40;
+int ledPinB4 =  41;
+int ledPinB5 =  42;
+int ledPinB6 =  43;
+int ledPinB7 =  44;
+
+
+int ledPinZ1 =  22;
+int ledPinZ2 =  24;
+int ledPinZ3 =  26;
+int ledPinZ4 =  28;
+int ledPinZ5 =  30;
+int ledPinZ6 =  32;
+int ledPinZ7 =  34;
+
+
+int ledPinC1 =  23;
+int ledPinC2 =  25;
+int ledPinC3 =  27;
+int ledPinC4 =  29;
+int ledPinC5 =  31;
+int ledPinC6 =  33;
+int ledPinC7 =  35;
+
+
+int stavTlac1 = 0;
+int stavTlac2 = 0;
+int stavTlac3 = 0;
+int stavTlac4 = 0;
+int stavTlac5 = 0;
+int stavTlac6 = 0;
+int stavTlac7 = 0;
+
+
+int laststavTlac1 = LOW;
+int laststavTlac2 = LOW;
+int laststavTlac3 = LOW;
+int laststavTlac4 = LOW;
+int laststavTlac5 = LOW;
+int laststavTlac6 = LOW;
+int laststavTlac7 = LOW;
+
+
+int stavLedB1 = LOW;
+int stavLedB2 = LOW;
+int stavLedB3 = LOW;
+int stavLedB4 = LOW;
+int stavLedB5 = LOW;
+int stavLedB6 = LOW;
+int stavLedB7 = LOW;
+
+
+void setup() {
+  Serial.begin(9600);
+  SPI.begin(); // init SPI bus
+  rfid.PCD_Init(); // init MFRC522
+
+  Serial.println("Přiložte kartu ke čtečce.");
+
+  pinMode(ledPinC1, OUTPUT);
+  pinMode(ledPinZ1, OUTPUT);
+  pinMode(ledPinB1, OUTPUT);
+  pinMode(tlacPin1, INPUT);
+}
+
+void loop() {
+  if (rfid.PICC_IsNewCardPresent()) { // new tag is available
+    if (rfid.PICC_ReadCardSerial()) { // NUID has been readed
+      MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
+      //Serial.print("RFID/NFC Tag Type: ");
+      //Serial.println(rfid.PICC_GetTypeName(piccType));
+
+      // print NUID in Serial Monitor in the hex format
+      Serial.print("UID:");
+      for (int i = 0; i < rfid.uid.size; i++) {
+
+        Serial.print(rfid.uid.uidByte[i]);
+      karta = karta + (rfid.uid.uidByte[i]);
+        
+      }
+      Serial.println();
+      lastKarta = karta;
+      karta = "";
+
+   if (lastKarta == KartaZlata){
+ Serial.println("Byla přiložena zlatá karta.");
+     PrilozeniS = 0;
+       PrilozeniB = 0;
+         PrilozeniZ++;
+  }
+
+   if (lastKarta == KartaStribrna){
+ Serial.println("Byla přiložena stříbrná karta.");
+    PrilozeniZ = 0;
+     PrilozeniB = 0;
+      PrilozeniS++;
+  }
+
+  if (lastKarta == KartaBronzova){
+ Serial.println("Byla přiložena bronzová karta.");
+    PrilozeniZ = 0;
+     PrilozeniS = 0;
+      PrilozeniB++;
+  }
+    
+      Serial.println(lastKarta);
+      Serial.println();
+      rfid.PICC_HaltA(); // halt PICC
+      rfid.PCD_StopCrypto1(); // stop encryption on PCD
+
+  //zlata
+ if (lastKarta == KartaZlata && PrilozeniZ != 2){
+  digitalWrite(ledPinZ1, HIGH);
+  digitalWrite(ledPinZ2, HIGH);
+  digitalWrite(ledPinZ3, HIGH);
+  digitalWrite(ledPinZ4, HIGH);
+  digitalWrite(ledPinZ5, HIGH);
+  digitalWrite(ledPinZ6, HIGH);
+  digitalWrite(ledPinZ7, HIGH);
+
+  digitalWrite(ledPinC1, LOW);
+  digitalWrite(ledPinC2, LOW);
+  digitalWrite(ledPinC3, LOW);
+  digitalWrite(ledPinC4, LOW);
+  digitalWrite(ledPinC5, LOW);
+  digitalWrite(ledPinC6, LOW);
+  digitalWrite(ledPinC7, LOW);
+}
+   if (PrilozeniZ == 2){
+  digitalWrite(ledPinZ1, LOW;
+  digitalWrite(ledPinZ2, LOW);
+  digitalWrite(ledPinZ3, LOW);
+  digitalWrite(ledPinZ4, LOW);
+  digitalWrite(ledPinZ5, LOW);
+  digitalWrite(ledPinZ6, LOW);
+  digitalWrite(ledPinZ7, LOW);
+
+  digitalWrite(ledPinC1, LOW);
+  digitalWrite(ledPinC2, LOW);
+  digitalWrite(ledPinC3, LOW);
+  digitalWrite(ledPinC4, LOW);
+  digitalWrite(ledPinC5, LOW);
+  digitalWrite(ledPinC6, LOW);
+  digitalWrite(ledPinC7, LOW);
+  PrilozeniZ = 0;
+  
+  }
+
+//stribrna
+if (lastKarta == KartaStribrna && PrilozeniS != 2){
+  digitalWrite(ledPinZ1, HIGH);
+  digitalWrite(ledPinZ2, HIGH);
+  digitalWrite(ledPinZ3, HIGH);
+  digitalWrite(ledPinZ4, LOW);
+  digitalWrite(ledPinZ5, LOW);
+  digitalWrite(ledPinZ6, HIGH);
+  digitalWrite(ledPinZ7, HIGH);
+
+  digitalWrite(ledPinC1, LOW);
+  digitalWrite(ledPinC2, LOW);
+  digitalWrite(ledPinC3, LOW);
+  digitalWrite(ledPinC4, HIGH);
+  digitalWrite(ledPinC5, HIGH);
+  digitalWrite(ledPinC6, LOW);
+  digitalWrite(ledPinC7, LOW);
+}
+   if (PrilozeniS == 2){
+  digitalWrite(ledPinZ1, LOW;
+  digitalWrite(ledPinZ2, LOW);
+  digitalWrite(ledPinZ3, LOW);
+  digitalWrite(ledPinZ4, LOW);
+  digitalWrite(ledPinZ5, LOW);
+  digitalWrite(ledPinZ6, LOW);
+  digitalWrite(ledPinZ7, LOW);
+
+  digitalWrite(ledPinC1, LOW);
+  digitalWrite(ledPinC2, LOW);
+  digitalWrite(ledPinC3, LOW);
+  digitalWrite(ledPinC4, LOW);
+  digitalWrite(ledPinC5, LOW);
+  digitalWrite(ledPinC6, LOW);
+  digitalWrite(ledPinC7, LOW);
+  PrilozeniS = 0;
+  
+  }
+
+//bronzova
+if (lastKarta == KartaBronzova && PrilozeniB != 2){
+  digitalWrite(ledPinZ1, HIGH);
+  digitalWrite(ledPinZ2, HIGH);
+  digitalWrite(ledPinZ3, HIGH);
+  digitalWrite(ledPinZ4, LOW);
+  digitalWrite(ledPinZ5, LOW);
+  digitalWrite(ledPinZ6, LOW);
+  digitalWrite(ledPinZ7, LOW);
+
+  digitalWrite(ledPinC1, LOW);
+  digitalWrite(ledPinC2, LOW);
+  digitalWrite(ledPinC3, LOW);
+  digitalWrite(ledPinC4, HIGH);
+  digitalWrite(ledPinC5, HIGH);
+  digitalWrite(ledPinC6, HIGH);
+  digitalWrite(ledPinC7, HIGH);
+}
+   if (PrilozeniB == 2){
+  digitalWrite(ledPinZ1, LOW;
+  digitalWrite(ledPinZ2, LOW);
+  digitalWrite(ledPinZ3, LOW);
+  digitalWrite(ledPinZ4, LOW);
+  digitalWrite(ledPinZ5, LOW);
+  digitalWrite(ledPinZ6, LOW);
+  digitalWrite(ledPinZ7, LOW);
+
+  digitalWrite(ledPinC1, LOW);
+  digitalWrite(ledPinC2, LOW);
+  digitalWrite(ledPinC3, LOW);
+  digitalWrite(ledPinC4, LOW);
+  digitalWrite(ledPinC5, LOW);
+  digitalWrite(ledPinC6, LOW);
+  digitalWrite(ledPinC7, LOW);
+  PrilozeniB = 0;
+  
+  }
+  
+    }
+  }
+
+stavTlac1 = digitalRead(tlacPin1);
+  if (stavTlac1 == HIGH && laststavTlac1 == LOW) {
+    stavLedB1 = !stavLedB1;
+  }
+
+stavTlac2 = digitalRead(tlacPin2);
+  if (stavTlac2 == HIGH && laststavTlac2 == LOW) {
+    stavLedB2 = !stavLedB2;
+  }
+
+stavTlac3 = digitalRead(tlacPin3);
+  if (stavTlac3 == HIGH && laststavTlac3 == LOW) {
+    stavLedB3 = !stavLedB3;
+  }
+
+stavTlac4 = digitalRead(tlacPin4);
+  if (stavTlac4 == HIGH && laststavTlac4 == LOW) {
+    stavLedB4 = !stavLedB4;
+  }
+
+stavTlac5 = digitalRead(tlacPin5);
+  if (stavTlac5 == HIGH && laststavTlac5 == LOW) {
+    stavLedB5 = !stavLedB5;
+  }
+
+stavTlac6 = digitalRead(tlacPin6);
+  if (stavTlac6 == HIGH && laststavTlac6 == LOW) {
+    stavLedB6 = !stavLedB6;
+  }
+
+stavTlac7 = digitalRead(tlacPin7);
+  if (stavTlac7 == HIGH && laststavTlac7 == LOW) {
+    stavLedB7 = !stavLedB7;
+  }
+
+
+  //bile ledky
+  if (stavLedB1 == HIGH) {
+    digitalWrite(ledPinB1, HIGH);
+  } else {
+    digitalWrite(ledPinB1, LOW);
+  }
+
+ if (stavLedB2 == HIGH) {
+    digitalWrite(ledPinB2, HIGH);
+  } else {
+    digitalWrite(ledPinB2, LOW);
+  }
+
+ if (stavLedB3 == HIGH) {
+    digitalWrite(ledPinB3, HIGH);
+  } else {
+    digitalWrite(ledPinB3, LOW);
+  }
+
+ if (stavLedB4 == HIGH) {
+    digitalWrite(ledPinB4, HIGH);
+  } else {
+    digitalWrite(ledPinB4, LOW);
+  }
+
+ if (stavLedB5 == HIGH) {
+    digitalWrite(ledPinB5, HIGH);
+  } else {
+    digitalWrite(ledPinB5, LOW);
+  }
+
+ if (stavLedB6 == HIGH) {
+    digitalWrite(ledPinB6, HIGH);
+  } else {
+    digitalWrite(ledPinB6, LOW);
+  }
+
+ if (stavLedB7 == HIGH) {
+    digitalWrite(ledPinB7, HIGH);
+  } else {
+    digitalWrite(ledPinB7, LOW);
+  }
+
+laststavTlac1 = stavTlac1;
+laststavTlac2 = stavTlac2;
+laststavTlac3 = stavTlac3;
+laststavTlac4 = stavTlac4;
+laststavTlac5 = stavTlac5;
+laststavTlac6 = stavTlac6;
+laststavTlac7 = stavTlac7;
+  lastKarta = "";
+        Serial.println(Prilozeni);
+
+}
