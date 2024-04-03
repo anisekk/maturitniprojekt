@@ -1,2 +1,0 @@
-# maturitniprojekt
-haha
