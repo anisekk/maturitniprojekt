@@ -156,7 +156,7 @@ void loop() {
   digitalWrite(ledPinC7, LOW);
 }
    if (PrilozeniZ == 2){
-  digitalWrite(ledPinZ1, LOW;
+  digitalWrite(ledPinZ1, LOW);
   digitalWrite(ledPinZ2, LOW);
   digitalWrite(ledPinZ3, LOW);
   digitalWrite(ledPinZ4, LOW);
@@ -194,7 +194,7 @@ if (lastKarta == KartaStribrna && PrilozeniS != 2){
   digitalWrite(ledPinC7, LOW);
 }
    if (PrilozeniS == 2){
-  digitalWrite(ledPinZ1, LOW;
+  digitalWrite(ledPinZ1, LOW);
   digitalWrite(ledPinZ2, LOW);
   digitalWrite(ledPinZ3, LOW);
   digitalWrite(ledPinZ4, LOW);
@@ -232,7 +232,7 @@ if (lastKarta == KartaBronzova && PrilozeniB != 2){
   digitalWrite(ledPinC7, HIGH);
 }
    if (PrilozeniB == 2){
-  digitalWrite(ledPinZ1, LOW;
+  digitalWrite(ledPinZ1, LOW);
   digitalWrite(ledPinZ2, LOW);
   digitalWrite(ledPinZ3, LOW);
   digitalWrite(ledPinZ4, LOW);
