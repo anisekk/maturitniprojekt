@@ -25,13 +25,13 @@ int tlacPin6 = 19;
 int tlacPin7 = 20; 
 
 
-int ledPinB1 =  38;
-int ledPinB2 =  39;
-int ledPinB3 =  40;
-int ledPinB4 =  41;
-int ledPinB5 =  42;
-int ledPinB6 =  43;
-int ledPinB7 =  44;
+int ledPinB1 =  2;
+int ledPinB2 =  3;
+int ledPinB3 =  4;
+int ledPinB4 =  5;
+int ledPinB5 =  6;
+int ledPinB6 =  7;
+int ledPinB7 =  8;
 
 
 int ledPinZ1 =  22;
