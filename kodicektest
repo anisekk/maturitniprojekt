@@ -16,13 +16,13 @@ int PrilozeniZ = 0;
 int PrilozeniS = 0;
 int PrilozeniB = 0;
 
-int tlacPin1 = 14; 
-int tlacPin2 = 15; 
-int tlacPin3 = 16; 
-int tlacPin4 = 17; 
-int tlacPin5 = 18; 
-int tlacPin6 = 19; 
-int tlacPin7 = 20; 
+int tlacPin1 = 38; 
+int tlacPin2 = 39; 
+int tlacPin3 = 40; 
+int tlacPin4 = 41; 
+int tlacPin5 = 42; 
+int tlacPin6 = 43; 
+int tlacPin7 = 44; 
 
 
 int ledPinB1 =  2;
@@ -89,7 +89,38 @@ void setup() {
   pinMode(ledPinC1, OUTPUT);
   pinMode(ledPinZ1, OUTPUT);
   pinMode(ledPinB1, OUTPUT);
+  
+  pinMode(ledPinC2, OUTPUT);
+  pinMode(ledPinZ2, OUTPUT);
+  pinMode(ledPinB2, OUTPUT);
+  
+  pinMode(ledPinC3, OUTPUT);
+  pinMode(ledPinZ3, OUTPUT);
+  pinMode(ledPinB3, OUTPUT);
+  
+  pinMode(ledPinZ4, OUTPUT);
+  pinMode(ledPinB4, OUTPUT);
+  pinMode(ledPinC4, OUTPUT);
+  
+  pinMode(ledPinZ5, OUTPUT);
+  pinMode(ledPinB5, OUTPUT);
+  pinMode(ledPinC5, OUTPUT);
+  
+  pinMode(ledPinZ6, OUTPUT);
+  pinMode(ledPinB6, OUTPUT);
+  pinMode(ledPinC6, OUTPUT);
+  
+  pinMode(ledPinZ7, OUTPUT);
+  pinMode(ledPinB7, OUTPUT);
+  pinMode(ledPinC7, OUTPUT);
+  
   pinMode(tlacPin1, INPUT);
+  pinMode(tlacPin2, INPUT);
+  pinMode(tlacPin3, INPUT);
+  pinMode(tlacPin4, INPUT);
+  pinMode(tlacPin5, INPUT);
+  pinMode(tlacPin6, INPUT);
+  pinMode(tlacPin7, INPUT);
 }
 
 void loop() {
@@ -136,26 +167,7 @@ void loop() {
       Serial.println();
       rfid.PICC_HaltA(); // halt PICC
       rfid.PCD_StopCrypto1(); // stop encryption on PCD
-
-  //zlata
- if (lastKarta == KartaZlata && PrilozeniZ != 2){
-  digitalWrite(ledPinZ1, HIGH);
-  digitalWrite(ledPinZ2, HIGH);
-  digitalWrite(ledPinZ3, HIGH);
-  digitalWrite(ledPinZ4, HIGH);
-  digitalWrite(ledPinZ5, HIGH);
-  digitalWrite(ledPinZ6, HIGH);
-  digitalWrite(ledPinZ7, HIGH);
-
-  digitalWrite(ledPinC1, LOW);
-  digitalWrite(ledPinC2, LOW);
-  digitalWrite(ledPinC3, LOW);
-  digitalWrite(ledPinC4, LOW);
-  digitalWrite(ledPinC5, LOW);
-  digitalWrite(ledPinC6, LOW);
-  digitalWrite(ledPinC7, LOW);
-}
-   if (PrilozeniZ == 2){
+if (PrilozeniZ >= 2 || PrilozeniB >= 2 || PrilozeniS >= 2){
   digitalWrite(ledPinZ1, LOW);
   digitalWrite(ledPinZ2, LOW);
   digitalWrite(ledPinZ3, LOW);
@@ -172,11 +184,31 @@ void loop() {
   digitalWrite(ledPinC6, LOW);
   digitalWrite(ledPinC7, LOW);
   PrilozeniZ = 0;
-  
+  PrilozeniS = 0;
+  PrilozeniB = 0;
   }
+  //zlata
+ if (lastKarta == KartaZlata && PrilozeniZ != 0){
+  digitalWrite(ledPinZ1, HIGH);
+  digitalWrite(ledPinZ2, HIGH);
+  digitalWrite(ledPinZ3, HIGH);
+  digitalWrite(ledPinZ4, HIGH);
+  digitalWrite(ledPinZ5, HIGH);
+  digitalWrite(ledPinZ6, HIGH);
+  digitalWrite(ledPinZ7, HIGH);
+
+  digitalWrite(ledPinC1, LOW);
+  digitalWrite(ledPinC2, LOW);
+  digitalWrite(ledPinC3, LOW);
+  digitalWrite(ledPinC4, LOW);
+  digitalWrite(ledPinC5, LOW);
+  digitalWrite(ledPinC6, LOW);
+  digitalWrite(ledPinC7, LOW);
+}
+   
 
 //stribrna
-if (lastKarta == KartaStribrna && PrilozeniS != 2){
+if (lastKarta == KartaStribrna && PrilozeniS != 0){
   digitalWrite(ledPinZ1, HIGH);
   digitalWrite(ledPinZ2, HIGH);
   digitalWrite(ledPinZ3, HIGH);
@@ -193,28 +225,10 @@ if (lastKarta == KartaStribrna && PrilozeniS != 2){
   digitalWrite(ledPinC6, LOW);
   digitalWrite(ledPinC7, LOW);
 }
-   if (PrilozeniS == 2){
-  digitalWrite(ledPinZ1, LOW);
-  digitalWrite(ledPinZ2, LOW);
-  digitalWrite(ledPinZ3, LOW);
-  digitalWrite(ledPinZ4, LOW);
-  digitalWrite(ledPinZ5, LOW);
-  digitalWrite(ledPinZ6, LOW);
-  digitalWrite(ledPinZ7, LOW);
-
-  digitalWrite(ledPinC1, LOW);
-  digitalWrite(ledPinC2, LOW);
-  digitalWrite(ledPinC3, LOW);
-  digitalWrite(ledPinC4, LOW);
-  digitalWrite(ledPinC5, LOW);
-  digitalWrite(ledPinC6, LOW);
-  digitalWrite(ledPinC7, LOW);
-  PrilozeniS = 0;
-  
-  }
+   
 
 //bronzova
-if (lastKarta == KartaBronzova && PrilozeniB != 2){
+if (lastKarta == KartaBronzova && PrilozeniB != 0){
   digitalWrite(ledPinZ1, HIGH);
   digitalWrite(ledPinZ2, HIGH);
   digitalWrite(ledPinZ3, HIGH);
@@ -231,25 +245,7 @@ if (lastKarta == KartaBronzova && PrilozeniB != 2){
   digitalWrite(ledPinC6, HIGH);
   digitalWrite(ledPinC7, HIGH);
 }
-   if (PrilozeniB == 2){
-  digitalWrite(ledPinZ1, LOW);
-  digitalWrite(ledPinZ2, LOW);
-  digitalWrite(ledPinZ3, LOW);
-  digitalWrite(ledPinZ4, LOW);
-  digitalWrite(ledPinZ5, LOW);
-  digitalWrite(ledPinZ6, LOW);
-  digitalWrite(ledPinZ7, LOW);
-
-  digitalWrite(ledPinC1, LOW);
-  digitalWrite(ledPinC2, LOW);
-  digitalWrite(ledPinC3, LOW);
-  digitalWrite(ledPinC4, LOW);
-  digitalWrite(ledPinC5, LOW);
-  digitalWrite(ledPinC6, LOW);
-  digitalWrite(ledPinC7, LOW);
-  PrilozeniB = 0;
-  
-  }
+   
   
     }
   }
@@ -341,6 +337,9 @@ laststavTlac5 = stavTlac5;
 laststavTlac6 = stavTlac6;
 laststavTlac7 = stavTlac7;
   lastKarta = "";
-        Serial.println(Prilozeni);
+        Serial.println(PrilozeniZ);
+        Serial.println(PrilozeniS);
+        Serial.println(PrilozeniB);
+        
 
 }
