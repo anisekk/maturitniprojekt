@@ -243,19 +243,19 @@ if (PrilozeniZ >= 2 || PrilozeniB >= 2 || PrilozeniS >= 2 || PrilozeniAdmin >= 2
 
 //stribrna
 if (lastKarta == KartaStribrna && PrilozeniS != 0){
-  digitalWrite(ledPinZ1, HIGH);
+  digitalWrite(ledPinZ1, LOW);
   digitalWrite(ledPinZ2, HIGH);
   digitalWrite(ledPinZ3, HIGH);
   digitalWrite(ledPinZ4, LOW);
-  digitalWrite(ledPinZ5, LOW);
+  digitalWrite(ledPinZ5, HIGH);
   digitalWrite(ledPinZ6, HIGH);
   digitalWrite(ledPinZ7, HIGH);
 
-  digitalWrite(ledPinC1, LOW);
+  digitalWrite(ledPinC1, HIGH);
   digitalWrite(ledPinC2, LOW);
   digitalWrite(ledPinC3, LOW);
   digitalWrite(ledPinC4, HIGH);
-  digitalWrite(ledPinC5, HIGH);
+  digitalWrite(ledPinC5, LOW);
   digitalWrite(ledPinC6, LOW);
   digitalWrite(ledPinC7, LOW);
 }
@@ -263,21 +263,21 @@ if (lastKarta == KartaStribrna && PrilozeniS != 0){
 
 //bronzova
 if (lastKarta == KartaBronzova && PrilozeniB != 0){
-  digitalWrite(ledPinZ1, HIGH);
-  digitalWrite(ledPinZ2, HIGH);
-  digitalWrite(ledPinZ3, HIGH);
+  digitalWrite(ledPinZ1, LOW);
+  digitalWrite(ledPinZ2, LOW);
+  digitalWrite(ledPinZ3, LOW);
   digitalWrite(ledPinZ4, LOW);
-  digitalWrite(ledPinZ5, LOW);
-  digitalWrite(ledPinZ6, LOW);
-  digitalWrite(ledPinZ7, LOW);
+  digitalWrite(ledPinZ5, HIGH);
+  digitalWrite(ledPinZ6, HIGH);
+  digitalWrite(ledPinZ7, HIGH);
 
-  digitalWrite(ledPinC1, LOW);
-  digitalWrite(ledPinC2, LOW);
-  digitalWrite(ledPinC3, LOW);
+  digitalWrite(ledPinC1, HIGH);
+  digitalWrite(ledPinC2, HIGH);
+  digitalWrite(ledPinC3, HIGH);
   digitalWrite(ledPinC4, HIGH);
-  digitalWrite(ledPinC5, HIGH);
-  digitalWrite(ledPinC6, HIGH);
-  digitalWrite(ledPinC7, HIGH);
+  digitalWrite(ledPinC5, LOW);
+  digitalWrite(ledPinC6, LOW);
+  digitalWrite(ledPinC7, LOW);
 }
 
    //admin
@@ -308,6 +308,15 @@ if (lastKarta == KartaCizi && PrilozeniCizi != 0){
   digitalWrite(ledPinZ6, LOW);
   digitalWrite(ledPinZ7, LOW);
 
+  digitalWrite(ledPinC1, HIGH);
+  digitalWrite(ledPinC2, HIGH);
+  digitalWrite(ledPinC3, HIGH);
+  digitalWrite(ledPinC4, HIGH);
+  digitalWrite(ledPinC5, HIGH);
+  digitalWrite(ledPinC6, HIGH);
+  digitalWrite(ledPinC7, HIGH);
+  delay(500);
+
   digitalWrite(ledPinC1, LOW);
   digitalWrite(ledPinC2, LOW);
   digitalWrite(ledPinC3, LOW);
@@ -315,6 +324,8 @@ if (lastKarta == KartaCizi && PrilozeniCizi != 0){
   digitalWrite(ledPinC5, LOW);
   digitalWrite(ledPinC6, LOW);
   digitalWrite(ledPinC7, LOW);
+  delay(500);
+  
 }
   
     }
