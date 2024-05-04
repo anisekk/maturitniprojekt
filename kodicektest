@@ -11,10 +11,16 @@ String lastKarta;
 String KartaZlata = "1789714527";
 String KartaStribrna = "17812217527";
 String KartaBronzova = "801543648";
+String KartaAdmin = "642016948";
+String KartaCizi = "16224916727";
+
+
 
 int PrilozeniZ = 0;
 int PrilozeniS = 0;
 int PrilozeniB = 0;
+int PrilozeniAdmin = 0;
+int PrilozeniCizi = 0;
 
 int tlacPin1 = 38; 
 int tlacPin2 = 39; 
@@ -146,6 +152,8 @@ void loop() {
  Serial.println("Byla přiložena zlatá karta.");
      PrilozeniS = 0;
        PrilozeniB = 0;
+       PrilozeniAdmin = 0;
+       PrilozeniCizi = 0;
          PrilozeniZ++;
   }
 
@@ -153,6 +161,8 @@ void loop() {
  Serial.println("Byla přiložena stříbrná karta.");
     PrilozeniZ = 0;
      PrilozeniB = 0;
+     PrilozeniAdmin = 0;
+       PrilozeniCizi = 0;
       PrilozeniS++;
   }
 
@@ -160,14 +170,35 @@ void loop() {
  Serial.println("Byla přiložena bronzová karta.");
     PrilozeniZ = 0;
      PrilozeniS = 0;
+      PrilozeniAdmin = 0;
+       PrilozeniCizi = 0;
       PrilozeniB++;
+  }
+
+    if (lastKarta == KartaAdmin){
+ Serial.println("Byla přiložena admin karta.");
+    PrilozeniZ = 0;
+     PrilozeniS = 0;
+     PrilozeniB = 0;
+     PrilozeniCizi = 0;
+      PrilozeniAdmin++;
+  }
+
+    if (lastKarta == KartaCizi){
+ Serial.println("Byla přiložena cizí karta.");
+    PrilozeniZ = 0;
+     PrilozeniS = 0;
+     PrilozeniB = 0;
+     PrilozeniAdmin = 0;
+      PrilozeniCizi++;
   }
     
       Serial.println(lastKarta);
       Serial.println();
       rfid.PICC_HaltA(); // halt PICC
       rfid.PCD_StopCrypto1(); // stop encryption on PCD
-if (PrilozeniZ >= 2 || PrilozeniB >= 2 || PrilozeniS >= 2){
+      
+if (PrilozeniZ >= 2 || PrilozeniB >= 2 || PrilozeniS >= 2 || PrilozeniAdmin >= 2 || PrilozeniCizi >= 2){
   digitalWrite(ledPinZ1, LOW);
   digitalWrite(ledPinZ2, LOW);
   digitalWrite(ledPinZ3, LOW);
@@ -186,7 +217,10 @@ if (PrilozeniZ >= 2 || PrilozeniB >= 2 || PrilozeniS >= 2){
   PrilozeniZ = 0;
   PrilozeniS = 0;
   PrilozeniB = 0;
+  PrilozeniAdmin = 0;
+  PrilozeniCizi = 0;
   }
+  
   //zlata
  if (lastKarta == KartaZlata && PrilozeniZ != 0){
   digitalWrite(ledPinZ1, HIGH);
@@ -245,7 +279,43 @@ if (lastKarta == KartaBronzova && PrilozeniB != 0){
   digitalWrite(ledPinC6, HIGH);
   digitalWrite(ledPinC7, HIGH);
 }
-   
+
+   //admin
+if (lastKarta == KartaAdmin && PrilozeniAdmin != 0){
+  digitalWrite(ledPinZ1, HIGH);
+  digitalWrite(ledPinZ2, HIGH);
+  digitalWrite(ledPinZ3, HIGH);
+  digitalWrite(ledPinZ4, HIGH);
+  digitalWrite(ledPinZ5, HIGH);
+  digitalWrite(ledPinZ6, HIGH);
+  digitalWrite(ledPinZ7, HIGH);
+
+  digitalWrite(ledPinC1, HIGH);
+  digitalWrite(ledPinC2, HIGH);
+  digitalWrite(ledPinC3, HIGH);
+  digitalWrite(ledPinC4, HIGH);
+  digitalWrite(ledPinC5, HIGH);
+  digitalWrite(ledPinC6, HIGH);
+  digitalWrite(ledPinC7, HIGH);
+}
+   //cizi
+if (lastKarta == KartaCizi && PrilozeniCizi != 0){
+  digitalWrite(ledPinZ1, LOW);
+  digitalWrite(ledPinZ2, LOW);
+  digitalWrite(ledPinZ3, LOW);
+  digitalWrite(ledPinZ4, LOW);
+  digitalWrite(ledPinZ5, LOW);
+  digitalWrite(ledPinZ6, LOW);
+  digitalWrite(ledPinZ7, LOW);
+
+  digitalWrite(ledPinC1, LOW);
+  digitalWrite(ledPinC2, LOW);
+  digitalWrite(ledPinC3, LOW);
+  digitalWrite(ledPinC4, LOW);
+  digitalWrite(ledPinC5, LOW);
+  digitalWrite(ledPinC6, LOW);
+  digitalWrite(ledPinC7, LOW);
+}
   
     }
   }
@@ -340,6 +410,6 @@ laststavTlac7 = stavTlac7;
         Serial.println(PrilozeniZ);
         Serial.println(PrilozeniS);
         Serial.println(PrilozeniB);
-        
-
+        Serial.println(PrilozeniAdmin);
+        Serial.println(PrilozeniCizi);
 }
