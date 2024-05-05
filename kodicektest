@@ -99,256 +99,6 @@ void setup() {
   
   pinMode(ledPinC2, OUTPUT);
   pinMode(ledPinZ2, OUTPUT);
-... (zbývá 366 řádků)
-Sbalit
-message.txt
-12 KB
-zkus
-anna<3 — dnes v 16:54
-FUNGUJE TO
-THANK YXOUUU SO MUCH
-GIF
-stôl — dnes v 16:54
-👍
-anna<3 — dnes v 16:54
-a co ty ledky bíly
-ý
-stôl — dnes v 16:55
-jako co s nima
-anna<3 — dnes v 16:55
-co jsem ti psala
-na msg
-stôl — dnes v 16:55
-jako
-kdyz jede alarm
-ze nebudou fungovat
-anna<3 — dnes v 16:55
-nenene
-ldyz sviti cerveny ledky
-jakoze nemas pristuo
-p
-a u toho alarmu jakoby taky ze jo
-alw to nejde
-ani tak
-takze to neres
-u toho alarmu to nejde xd
-nevim jak se to stalo ale nebudu to resit hlavne ze to nejde
-stôl — dnes v 16:56
-protoze si v loopu
-anna<3 — dnes v 16:58
-jo to je ejdno
-zkusis i ty bily ledky?
-pwease🥹
-stôl — dnes v 17:02
-#include <SPI.h>
-#include <MFRC522.h>
-
-#define SS_PIN 53
-#define RST_PIN 49
-
-MFRC522 rfid(SS_PIN, RST_PIN);
-String karta;
-String lastKarta;
-
-String KartaZlata = "1789714527";
-String KartaStribrna = "17812217527";
-String KartaBronzova = "801543648";
-String KartaAdmin = "642016948";
-String KartaCizi = "16224916727";
-
-boolean alarm = false;
-
-int PrilozeniZ = 0;
-int PrilozeniS = 0;
-int PrilozeniB = 0;
-int PrilozeniAdmin = 0;
-int PrilozeniCizi = 0;
-
-int tlacPin1 = 38; 
-int tlacPin2 = 39; 
-int tlacPin3 = 40; 
-int tlacPin4 = 41; 
-int tlacPin5 = 42; 
-int tlacPin6 = 43; 
-int tlacPin7 = 44; 
-
-
-int ledPinB1 =  2;
-int ledPinB2 =  3;
-int ledPinB3 =  4;
-int ledPinB4 =  5;
-int ledPinB5 =  6;
-int ledPinB6 =  7;
-int ledPinB7 =  8;
-
-
-int ledPinZ1 =  22;
-int ledPinZ2 =  24;
-int ledPinZ3 =  26;
-int ledPinZ4 =  28;
-int ledPinZ5 =  30;
-int ledPinZ6 =  32;
-int ledPinZ7 =  34;
-
-
-int ledPinC1 =  23;
-int ledPinC2 =  25;
-int ledPinC3 =  27;
-int ledPinC4 =  29;
-int ledPinC5 =  31;
-int ledPinC6 =  33;
-int ledPinC7 =  35;
-
-
-int stavTlac1 = 0;
-int stavTlac2 = 0;
-int stavTlac3 = 0;
-int stavTlac4 = 0;
-int stavTlac5 = 0;
-int stavTlac6 = 0;
-int stavTlac7 = 0;
-
-
-int laststavTlac1 = LOW;
-int laststavTlac2 = LOW;
-int laststavTlac3 = LOW;
-int laststavTlac4 = LOW;
-int laststavTlac5 = LOW;
-int laststavTlac6 = LOW;
-int laststavTlac7 = LOW;
-
-
-int stavLedB1 = LOW;
-int stavLedB2 = LOW;
-int stavLedB3 = LOW;
-int stavLedB4 = LOW;
-int stavLedB5 = LOW;
-int stavLedB6 = LOW;
-int stavLedB7 = LOW;
-
-
-void setup() {
-  Serial.begin(9600);
-  SPI.begin(); // init SPI bus
-  rfid.PCD_Init(); // init MFRC522
-
-  Serial.println("Přiložte kartu ke čtečce.");
-
-  pinMode(ledPinC1, OUTPUT);
-  pinMode(ledPinZ1, OUTPUT);
-  pinMode(ledPinB1, OUTPUT);
-  
-  pinMode(ledPinC2, OUTPUT);
-  pinMode(ledPinZ2, OUTPUT);
-... (zbývá 402 řádků)
-Sbalit
-message.txt
-13 KB
-jestli to nepujde tak to seru
-﻿
-stôl
-davo1313
-IN DANGER
-#include <SPI.h>
-#include <MFRC522.h>
-
-#define SS_PIN 53
-#define RST_PIN 49
-
-MFRC522 rfid(SS_PIN, RST_PIN);
-String karta;
-String lastKarta;
-
-String KartaZlata = "1789714527";
-String KartaStribrna = "17812217527";
-String KartaBronzova = "801543648";
-String KartaAdmin = "642016948";
-String KartaCizi = "16224916727";
-
-boolean alarm = false;
-
-int PrilozeniZ = 0;
-int PrilozeniS = 0;
-int PrilozeniB = 0;
-int PrilozeniAdmin = 0;
-int PrilozeniCizi = 0;
-
-int tlacPin1 = 38; 
-int tlacPin2 = 39; 
-int tlacPin3 = 40; 
-int tlacPin4 = 41; 
-int tlacPin5 = 42; 
-int tlacPin6 = 43; 
-int tlacPin7 = 44; 
-
-
-int ledPinB1 =  2;
-int ledPinB2 =  3;
-int ledPinB3 =  4;
-int ledPinB4 =  5;
-int ledPinB5 =  6;
-int ledPinB6 =  7;
-int ledPinB7 =  8;
-
-
-int ledPinZ1 =  22;
-int ledPinZ2 =  24;
-int ledPinZ3 =  26;
-int ledPinZ4 =  28;
-int ledPinZ5 =  30;
-int ledPinZ6 =  32;
-int ledPinZ7 =  34;
-
-
-int ledPinC1 =  23;
-int ledPinC2 =  25;
-int ledPinC3 =  27;
-int ledPinC4 =  29;
-int ledPinC5 =  31;
-int ledPinC6 =  33;
-int ledPinC7 =  35;
-
-
-int stavTlac1 = 0;
-int stavTlac2 = 0;
-int stavTlac3 = 0;
-int stavTlac4 = 0;
-int stavTlac5 = 0;
-int stavTlac6 = 0;
-int stavTlac7 = 0;
-
-
-int laststavTlac1 = LOW;
-int laststavTlac2 = LOW;
-int laststavTlac3 = LOW;
-int laststavTlac4 = LOW;
-int laststavTlac5 = LOW;
-int laststavTlac6 = LOW;
-int laststavTlac7 = LOW;
-
-
-int stavLedB1 = LOW;
-int stavLedB2 = LOW;
-int stavLedB3 = LOW;
-int stavLedB4 = LOW;
-int stavLedB5 = LOW;
-int stavLedB6 = LOW;
-int stavLedB7 = LOW;
-
-
-void setup() {
-  Serial.begin(9600);
-  SPI.begin(); // init SPI bus
-  rfid.PCD_Init(); // init MFRC522
-
-  Serial.println("Přiložte kartu ke čtečce.");
-
-  pinMode(ledPinC1, OUTPUT);
-  pinMode(ledPinZ1, OUTPUT);
-  pinMode(ledPinB1, OUTPUT);
-  
-  pinMode(ledPinC2, OUTPUT);
-  pinMode(ledPinZ2, OUTPUT);
   pinMode(ledPinB2, OUTPUT);
   
   pinMode(ledPinC3, OUTPUT);
@@ -401,7 +151,7 @@ void loop() {
       
       
       if(lastKarta == KartaCizi) {
-    	  alarm = true;
+        alarm = true;
       }
 
    if (lastKarta == KartaZlata){
@@ -575,40 +325,40 @@ if (lastKarta == KartaCizi && PrilozeniCizi != 0){
 
   // Blikání všech LED u pinů C
   while(alarm == true) {
-	    digitalWrite(ledPinC1, !digitalRead(ledPinC1));
-	    digitalWrite(ledPinC2, !digitalRead(ledPinC2));
-	    digitalWrite(ledPinC3, !digitalRead(ledPinC3));
-	    digitalWrite(ledPinC4, !digitalRead(ledPinC4));
-	    digitalWrite(ledPinC5, !digitalRead(ledPinC5));
-	    digitalWrite(ledPinC6, !digitalRead(ledPinC6));
-	    digitalWrite(ledPinC7, !digitalRead(ledPinC7));
-	    delay(500); // Pauza pro blikání
-	    if (rfid.PICC_IsNewCardPresent()) { // new tag is available
-	        if (rfid.PICC_ReadCardSerial()) { // NUID has been readed
-	          MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
-	          //Serial.print("RFID/NFC Tag Type: ");
-	          //Serial.println(rfid.PICC_GetTypeName(piccType));
+      digitalWrite(ledPinC1, !digitalRead(ledPinC1));
+      digitalWrite(ledPinC2, !digitalRead(ledPinC2));
+      digitalWrite(ledPinC3, !digitalRead(ledPinC3));
+      digitalWrite(ledPinC4, !digitalRead(ledPinC4));
+      digitalWrite(ledPinC5, !digitalRead(ledPinC5));
+      digitalWrite(ledPinC6, !digitalRead(ledPinC6));
+      digitalWrite(ledPinC7, !digitalRead(ledPinC7));
+      delay(500); // Pauza pro blikání
+      if (rfid.PICC_IsNewCardPresent()) { // new tag is available
+          if (rfid.PICC_ReadCardSerial()) { // NUID has been readed
+            MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
+            //Serial.print("RFID/NFC Tag Type: ");
+            //Serial.println(rfid.PICC_GetTypeName(piccType));
 
-	          // print NUID in Serial Monitor in the hex format
-	          Serial.print("UID:");
-	          for (int i = 0; i < rfid.uid.size; i++) {
+            // print NUID in Serial Monitor in the hex format
+            Serial.print("UID:");
+            for (int i = 0; i < rfid.uid.size; i++) {
 
-	            Serial.print(rfid.uid.uidByte[i]);
-	          karta = karta + (rfid.uid.uidByte[i]);
+              Serial.print(rfid.uid.uidByte[i]);
+            karta = karta + (rfid.uid.uidByte[i]);
 
-	          }
-	          Serial.println();
-	          lastKarta = karta;
-	          karta = "";
-	          
-	          
-	          if(lastKarta == KartaAdmin) {
-	        	  alarm = false;
-	          }
-	          
-	        }
-	    }
-	  }
+            }
+            Serial.println();
+            lastKarta = karta;
+            karta = "";
+            
+            
+            if(lastKarta == KartaAdmin) {
+              alarm = false;
+            }
+            
+          }
+      }
+    }
 
   // Po ukončení smyčky vrátíme všechny LEDky na výchozí stav
   digitalWrite(ledPinC1, LOW);
@@ -661,81 +411,81 @@ stavTlac7 = digitalRead(tlacPin7);
   //bile ledky
   
   if(digitalRead(ledPinC1) == HIGH) {
-	  
+    
   }else {
-	  if (stavLedB1 == HIGH) {
-		    digitalWrite(ledPinB1, HIGH);
-		  } else {
-		    digitalWrite(ledPinB1, LOW);
-		  } 
+    if (stavLedB1 == HIGH) {
+        digitalWrite(ledPinB1, HIGH);
+      } else {
+        digitalWrite(ledPinB1, LOW);
+      } 
   }
   
 if(digitalRead(ledPinC2) == HIGH) {
-	  
+    
   }else {
-	  if (stavLedB2 == HIGH) {
-		    digitalWrite(ledPinB2, HIGH);
-		  } else {
-		    digitalWrite(ledPinB2, LOW);
-		  }
+    if (stavLedB2 == HIGH) {
+        digitalWrite(ledPinB2, HIGH);
+      } else {
+        digitalWrite(ledPinB2, LOW);
+      }
   }
-	
-	 
+  
+   
 if(digitalRead(ledPinC3) == HIGH) {
-	  
+    
 }else {
-	if (stavLedB3 == HIGH) {
-	    digitalWrite(ledPinB3, HIGH);
-	  } else {
-	    digitalWrite(ledPinB3, LOW);
-	  }
+  if (stavLedB3 == HIGH) {
+      digitalWrite(ledPinB3, HIGH);
+    } else {
+      digitalWrite(ledPinB3, LOW);
+    }
 }
-	
-	 
+  
+   
 if(digitalRead(ledPinC4) == HIGH) {
-	  
+    
 }else {
-	if (stavLedB4 == HIGH) {
-	    digitalWrite(ledPinB4, HIGH);
-	  } else {
-	    digitalWrite(ledPinB4, LOW);
-	  }
+  if (stavLedB4 == HIGH) {
+      digitalWrite(ledPinB4, HIGH);
+    } else {
+      digitalWrite(ledPinB4, LOW);
+    }
 }
-	
-	 
+  
+   
 if(digitalRead(ledPinC5) == HIGH) {
-	  
+    
 }else {
-	if (stavLedB5 == HIGH) {
-	    digitalWrite(ledPinB5, HIGH);
-	  } else {
-	    digitalWrite(ledPinB5, LOW);
-	  }
+  if (stavLedB5 == HIGH) {
+      digitalWrite(ledPinB5, HIGH);
+    } else {
+      digitalWrite(ledPinB5, LOW);
+    }
 }
-	
-	 
+  
+   
 if(digitalRead(ledPinC6) == HIGH) {
-	  
+    
 }else {
-	if (stavLedB6 == HIGH) {
-	    digitalWrite(ledPinB6, HIGH);
-	  } else {
-	    digitalWrite(ledPinB6, LOW);
-	  }
+  if (stavLedB6 == HIGH) {
+      digitalWrite(ledPinB6, HIGH);
+    } else {
+      digitalWrite(ledPinB6, LOW);
+    }
 }
-	
-	 
+  
+   
 if(digitalRead(ledPinC7) == HIGH) {
-	  
+    
 }else {
-	if (stavLedB7 == HIGH) {
-	    digitalWrite(ledPinB7, HIGH);
-	  } else {
-	    digitalWrite(ledPinB7, LOW);
-	  }
+  if (stavLedB7 == HIGH) {
+      digitalWrite(ledPinB7, HIGH);
+    } else {
+      digitalWrite(ledPinB7, LOW);
+    }
 }
-	
-	 
+  
+   
 
 laststavTlac1 = stavTlac1;
 laststavTlac2 = stavTlac2;
