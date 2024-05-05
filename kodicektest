@@ -14,7 +14,7 @@ String KartaBronzova = "801543648";
 String KartaAdmin = "642016948";
 String KartaCizi = "16224916727";
 
-
+boolean alarm = false;
 
 int PrilozeniZ = 0;
 int PrilozeniS = 0;
@@ -147,6 +147,11 @@ void loop() {
       Serial.println();
       lastKarta = karta;
       karta = "";
+      
+      
+      if(lastKarta == KartaCizi) {
+    	  alarm = true;
+      }
 
    if (lastKarta == KartaZlata){
  Serial.println("Byla přiložena zlatá karta.");
@@ -318,16 +323,41 @@ if (lastKarta == KartaCizi && PrilozeniCizi != 0){
   digitalWrite(ledPinC7, HIGH);
 
   // Blikání všech LED u pinů C
-  while(lastKarta == KartaCizi) {
-    digitalWrite(ledPinC1, !digitalRead(ledPinC1));
-    digitalWrite(ledPinC2, !digitalRead(ledPinC2));
-    digitalWrite(ledPinC3, !digitalRead(ledPinC3));
-    digitalWrite(ledPinC4, !digitalRead(ledPinC4));
-    digitalWrite(ledPinC5, !digitalRead(ledPinC5));
-    digitalWrite(ledPinC6, !digitalRead(ledPinC6));
-    digitalWrite(ledPinC7, !digitalRead(ledPinC7));
-    delay(500); // Pauza pro blikání
-  }
+  while(alarm == true) {
+	    digitalWrite(ledPinC1, !digitalRead(ledPinC1));
+	    digitalWrite(ledPinC2, !digitalRead(ledPinC2));
+	    digitalWrite(ledPinC3, !digitalRead(ledPinC3));
+	    digitalWrite(ledPinC4, !digitalRead(ledPinC4));
+	    digitalWrite(ledPinC5, !digitalRead(ledPinC5));
+	    digitalWrite(ledPinC6, !digitalRead(ledPinC6));
+	    digitalWrite(ledPinC7, !digitalRead(ledPinC7));
+	    delay(500); // Pauza pro blikání
+	    if (rfid.PICC_IsNewCardPresent()) { // new tag is available
+	        if (rfid.PICC_ReadCardSerial()) { // NUID has been readed
+	          MFRC522::PICC_Type piccType = rfid.PICC_GetType(rfid.uid.sak);
+	          //Serial.print("RFID/NFC Tag Type: ");
+	          //Serial.println(rfid.PICC_GetTypeName(piccType));
+
+	          // print NUID in Serial Monitor in the hex format
+	          Serial.print("UID:");
+	          for (int i = 0; i < rfid.uid.size; i++) {
+
+	            Serial.print(rfid.uid.uidByte[i]);
+	          karta = karta + (rfid.uid.uidByte[i]);
+
+	          }
+	          Serial.println();
+	          lastKarta = karta;
+	          karta = "";
+	          
+	          
+	          if(lastKarta == KartaAdmin) {
+	        	  alarm = false;
+	          }
+	          
+	        }
+	    }
+	  }
 
   // Po ukončení smyčky vrátíme všechny LEDky na výchozí stav
   digitalWrite(ledPinC1, LOW);
