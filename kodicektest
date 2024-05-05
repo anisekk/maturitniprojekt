@@ -299,6 +299,7 @@ if (lastKarta == KartaAdmin && PrilozeniAdmin != 0){
   digitalWrite(ledPinC7, HIGH);
 }
    //cizi
+//cizi
 if (lastKarta == KartaCizi && PrilozeniCizi != 0){
   digitalWrite(ledPinZ1, LOW);
   digitalWrite(ledPinZ2, LOW);
@@ -315,8 +316,20 @@ if (lastKarta == KartaCizi && PrilozeniCizi != 0){
   digitalWrite(ledPinC5, HIGH);
   digitalWrite(ledPinC6, HIGH);
   digitalWrite(ledPinC7, HIGH);
-  delay(500);
 
+  // Blikání všech LED u pinů C
+  while(lastKarta == KartaCizi) {
+    digitalWrite(ledPinC1, !digitalRead(ledPinC1));
+    digitalWrite(ledPinC2, !digitalRead(ledPinC2));
+    digitalWrite(ledPinC3, !digitalRead(ledPinC3));
+    digitalWrite(ledPinC4, !digitalRead(ledPinC4));
+    digitalWrite(ledPinC5, !digitalRead(ledPinC5));
+    digitalWrite(ledPinC6, !digitalRead(ledPinC6));
+    digitalWrite(ledPinC7, !digitalRead(ledPinC7));
+    delay(500); // Pauza pro blikání
+  }
+
+  // Po ukončení smyčky vrátíme všechny LEDky na výchozí stav
   digitalWrite(ledPinC1, LOW);
   digitalWrite(ledPinC2, LOW);
   digitalWrite(ledPinC3, LOW);
@@ -324,10 +337,7 @@ if (lastKarta == KartaCizi && PrilozeniCizi != 0){
   digitalWrite(ledPinC5, LOW);
   digitalWrite(ledPinC6, LOW);
   digitalWrite(ledPinC7, LOW);
-  delay(500);
-  
 }
-  
     }
   }
 
